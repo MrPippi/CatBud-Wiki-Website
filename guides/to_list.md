@@ -32,7 +32,6 @@
 |/to by Fengwa1007|公共社交中心|
 |/to by leoad|萊姆新手村|
 |/to by MinMingOwO|魚寶PVP場|
-|/to by Lishiya_0421|棋牌館(註:目前他月卡掉了)|
 
 ### 交易/抽獎
 
@@ -73,3 +72,4 @@
 |/to by Snake960031|深海守衛塔|
 |/to by SunaChen|燕麥女僕咖啡廳兼藏畫閣|
 |/to by Robrter|豬人塔|
+|/to by SangPapillon|法羅小館|
