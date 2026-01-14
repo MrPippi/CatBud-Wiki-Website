@@ -22,3 +22,5 @@ Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11
 ## 聲明
 
 本Wiki使用圖片均來自[貓芽伺服器](https://discord.gg/catbud)及[CatBudMC的GitHub](https://github.com/CatBudMC)
+## 協助校正
+請在Discord聯繫 @icebearowob
