@@ -18,7 +18,6 @@
 ### 頭盔
 [動作音效](./action_sound.md)  
 [美食](./gourmand.md)  
-[健康](./healthy.md)
 ### 鞘翅
 [浮力](./buoyancy.md)  
 [疾風](./gale.md)  
@@ -27,6 +26,7 @@
 [倔強](./stubborn.md)  
 [脆弱](./fragile.md)  
 [重力](./gravity.md)  
+[健康](./healthy.md) 
 ### 護腿
 [穩重潛行](./steady_sneak.md)
 ### 靴子
