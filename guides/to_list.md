@@ -12,11 +12,9 @@
 |:---:|:---:|
 |/to by NekoFumi_YuYu|公共安德塔|
 |/to by Maki_1007|Pure村民交易所|
-|/to by GuraaaA8787|女巫塔|
 |/to by whiteantPi|蠹魚經驗塔|
 |/to by daniel1689|Tom鐵人塔|
-|/to by Ghost_Sister|凋零骷髏塔|
-|/to by Darlingg02|眼淚塔|
+|/to by Ghost_Sister|凋零骷髏塔(已被結構刷新)|
 
 ### 地形/結構
 
@@ -32,32 +30,33 @@
 |:---:|:---:|
 |/to by Fengwa1007|公共社交中心|
 |/to by leoad|萊姆新手村|
-|/to by MinMingOwO|魚寶PVP場|
+|/to by Lishiya_0421|棋牌館|
 
 ### 交易/抽獎
 
 |傳點列表|傳點說明|
 |:---:|:---:|
 |/to by Mikki15625|mikki抽獎機|
-|/to by AXOLOTL_LCY|商場(?(建設中)|
+|/to by AXOLOTL_LCY|商場(建設中)|
 |/to by TangAir|實體商店街|
+|/to by 11cookies22|小型商店街|
 
 ### 觀光景點
 
 |傳點列表|傳點說明|
 |:---:|:---:|
-|/to by enenenenenenen|enen家|
 |/to by YuanHua0707|淵之繪館|
 |/to by GuraaaA8787|櫻花樹|
 |/to by GiddyStone96043|彩虹烽火台|
 |/to by BlueRiver1214|浴衣貓貓/世界重生點|
 |/to by XaioWei777|雅利洛VI貝洛柏格|
-|/to by samvincent4k|雪淬小展館|
 |/to by DiuCanTaloupe_|奇幻村(註:他月卡也掉了)|
 |/to by 7Meow_Yue|龍龍的結婚禮堂&櫻花庄|
-|/to by Shimo0518|科科小鎮|
 |/to by ComeRed1225|東南山城嶺|
-|/to by Emily_416|希西爾城|
+|/to by SangPapillon|法羅小館|
+|/to by Luck_Maple|法羅小館|
+|/to by MinMingOwO|無限軌道地繪|
+|/to by SunaChen|燕麥女僕咖啡廳兼藏畫閣|
 
 ### 其他
 
@@ -70,7 +69,5 @@
 |/to by kenny_wing|kenny家(小心摔死)|
 |/to by shamazai|小溫火藥塔|
 |/to by Qing_0525|石磚家...底下的洞|
-|/to by Snake960031|深海守衛塔|
-|/to by SunaChen|燕麥女僕咖啡廳兼藏畫閣|
-|/to by Robrter|豬人塔|
-|/to by SangPapillon|法羅小館|
+|/to by Snake960031|史萊姆塔|
+|/to by peter19811007|小嘉大教堂|
