@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指南 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="image/logo.png" alt="" class="site-logo-img">
+        貓芽伺服器 <span>Wiki</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html">貓芽 Wiki</a>
+      </div>
+      <a href="index.html" class="sidebar-back">← 返回首頁</a>
+      <div class="sidebar-section-title">指南</div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const SECTION_ID = 'guides';
+    const PAGES = [
+      { id: 'to_list', title: '公共傳點列表' },
+    ];
+
+    const EMBEDDED_PAGES = {
+      to_list: `# 公共傳點列表
+
+一個關於貓芽現有公傳點的介紹區，不定時更新
+
+## 傳點列表
+
+> 最後更新日期:2026/1/29
+> 部分資料來源 @kuroda_yi177 黑田
+
+### 公共設施
+
+|傳點列表(可複製指令)|傳點說明|
+|:---:|:---:|
+|/to by NekoFumi_YuYu|公共安德塔|
+|/to by Maki_1007|Pure村民交易所|
+|/to by whiteantPi|蠹魚經驗塔|
+|/to by daniel1689|公共鐵人塔|
+|/to by Ghost_Sister|凋零骷髏塔(已被結構刷新)|
+|/to by MinMingOwO|公共鐵人塔|
+
+### 地形/結構
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by weiwei0829|終界傳送門|
+|/to by kiki1225|終界傳送門|
+|/to by SYLJ0422|終界本島|
+
+### 公共社交活動區域
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by Fengwa1007|公共社交中心|
+|/to by leoad|萊姆新手村|
+|/to by Lishiya_0421|棋牌館|
+
+### 交易/抽獎
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by Mikki15625|地圖繪兼鑽石抽獎機|
+|/to by AXOLOTL_LCY|商場(建設中)|
+|/to by TangAir|實體商店街|
+|/to by 11cookies22|小型商店街|
+|/to by MatchMan_qwq|賭場|
+
+### 觀光景點
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by YuanHua0707|淵之繪館|
+|/to by GuraaaA8787|櫻花樹|
+|/to by GiddyStone96043|彩虹烽火台|
+|/to by BlueRiver1214|浴衣貓貓/世界重生點|
+|/to by XaioWei777|雅利洛VI貝洛柏格|
+|/to by 7Meow_Yue|龍龍的結婚禮堂&櫻花庄|
+|/to by ComeRed1225|東南山城嶺|
+|/to by SangPapillon|法羅小館|
+|/to by Luck_Maple|法羅小館|
+|/to by SunaChen|燕麥女僕咖啡廳兼藏畫閣|
+|/to by jacky00817|雞之繪館|
+
+### 其他
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by Ochite_Miro|森息家|
+|/to by NiceDumpling|奇怪的蜂蜜小屋|
+|/to by Big_Gacha|沙漠戰場|
+|/to by kenny_wing|kenny家(小心摔死)|
+|/to by shamazai|小溫火藥塔|
+|/to by Qing_0525|鐘乳石洞窟|
+|/to by Snake960031|史萊姆塔|
+|/to by peter19811007|小嘉大教堂|
+|/to by WilsonOvO|Wilson家|
+|/to by Wowo_wo|未知建築(但感覺應該是蓋成百貨公司了)|
+|/to by Salmon1118|圖場(但公傳點設置在虛空)|
+
+### 月卡失效而消失的傳點
+
+|傳點列表|傳點說明|
+|:---:|:---:|
+|/to by DiuCanTaloupe_|奇幻村|`
+    };
+
+    function getPath() { return window.location.hash.slice(1) || PAGES[0].id; }
+    function fixImagePaths(md) { return md.replace(/\]\(\.\//g, '](' + SECTION_ID + '/').replace(/src="\.\//g, 'src="' + SECTION_ID + '/'); }
+    function fixInternalLinks(md) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        const name = p.replace(/^\.\.\//, '').replace(/\.md$/, '');
+        return name.includes('/') ? '](#' + name.split('/').pop() + ')' : '](#' + name + ')';
+      });
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = PAGES.map(p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${p.title}</a>`).join('');
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => { if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open'); });
+      });
+    }
+
+    function loadPage(id) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      article.innerHTML = '';
+      loading.style.display = 'block';
+      const raw = EMBEDDED_PAGES[id];
+      if (raw === undefined) {
+        article.innerHTML = '<div class="error">無法載入此頁面</div>';
+      } else {
+        let content = fixImagePaths(raw);
+        content = fixInternalLinks(content);
+        marked.setOptions({ gfm: true, breaks: true });
+        article.innerHTML = marked.parse(content);
+      }
+      loading.style.display = 'none';
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.getAttribute('data-id') === id));
+    }
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+    document.getElementById('content').addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+      try {
+        const href = a.getAttribute('href') || '';
+        const hashIdx = href.indexOf('#');
+        if (hashIdx < 0) return;
+        const id = decodeURIComponent(href.slice(hashIdx + 1).split('?')[0].split('#')[0].trim());
+        if (!id || !PAGES.some(p => p.id === id)) return;
+        e.preventDefault();
+        window.location.hash = id;
+        loadPage(id);
+      } catch (err) {}
+    });
+    renderNav();
+    loadPage(getPath());
+  </script>
+</body>
+</html>

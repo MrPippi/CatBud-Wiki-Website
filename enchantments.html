@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特殊附魔 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="image/logo.png" alt="" class="site-logo-img">
+        貓芽伺服器 <span>Wiki</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html">貓芽 Wiki</a>
+      </div>
+      <a href="index.html" class="sidebar-back">← 返回首頁</a>
+      <div class="sidebar-section-title" id="sectionTitle">特殊附魔</div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const SECTION_ID = 'enchantments';
+    const SECTION_TITLE = '特殊附魔';
+    const EMBEDDED_PAGES = {
+      frozen: `# 冰凍
+近戰武器攻擊後將目標冰凍，
+等級越高持續時間越久。
+
+最大等級 Ⅲ
+## 適用裝備
+- 劍
+- 矛
+## 衝突
+- 燃燒
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵`,
+      bloodsucking: `# 吸血
+近戰武器造成傷害的 4 ~ 10% 恢復成生命值。
+
+最大等級 Ⅳ
+## 適用裝備
+- 劍
+- 矛
+## 衝突
+- 鋒利
+- 節肢剋星
+- 不死剋星
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|造成傷害的4%恢復成生命值|
+|Ⅱ|造成傷害的6%恢復成生命值|
+|Ⅲ|造成傷害的8%恢復成生命值|
+|Ⅳ|造成傷害的10%恢復成生命值|`,
+      wisdom: `# 智慧
+近戰武器造成生物死亡時增加 10 ~ 50% 掉落經驗值，
+Boss 不適用於此效果。
+
+最高等級 Ⅴ
+## 適用物品
+- 劍
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加10%掉落經驗值|
+|Ⅱ|增加20%掉落經驗值|
+|Ⅲ|增加30%掉落經驗值|
+|Ⅳ|增加40%掉落經驗值|
+|Ⅴ|增加50%掉落經驗值|`,
+      critical_chance: `# 爆擊可能
+斧有 8 ~ 20% 機率造成 200% 傷害，
+存在虛弱狀態時無法觸發效果。
+
+最大等級 Ⅳ
+## 適用裝備
+- 斧
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|8%機率造成200%傷害|
+|Ⅱ|12%機率造成200%傷害|
+|Ⅲ|16%機率造成200%傷害|
+|Ⅳ|20%機率造成200%傷害|`,
+      spear: `# 遠擊
+斧的實體互動距離增加 1 ~ 3 方塊，
+存在虛弱狀態時無法觸發效果。
+
+最大等級 Ⅲ
+## 適用物品
+- 斧
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|方塊實體互動距離增加1方塊|
+|Ⅱ|方塊實體互動距離增加2方塊|
+|Ⅲ|方塊實體互動距離增加3方塊|`,
+      wind_blast: `# 風擊
+使用盾牌成功阻擋攻擊時有 20 ~ 100% 產生風暴。
+
+最高等級 Ⅴ
+## 適用物品
+- 盾牌
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|20%產生風暴|
+|Ⅱ|40%產生風暴|
+|Ⅲ|60%產生風暴|
+|Ⅳ|80%產生風暴|
+|Ⅴ|100%產生風暴|`,
+      giganticize: `# 巨大化
+穿著在身上時增加 15 ~ 30% 體積，
+全套總共增加 60 ~ 120% 體積。
+
+最大等級 Ⅱ
+## 適用裝備
+- 頭盔
+- 胸甲
+- 護腿
+- 靴子
+## 衝突
+- 迷你化
+## 獲取方式
+- 魔幻之塔Boss的掉落物
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加15%體積|
+|Ⅱ|增加30%體積|`,
+      miniaturize: `# 迷你化
+穿著在身上時減少 10% 體積，
+全套總共減少 40% 體積。
+
+最大等級 Ⅰ
+## 適用物品
+- 頭盔
+- 胸甲
+- 護腿
+- 靴子
+## 衝突
+- 巨大化
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵`,
+      knockback_resistance: `# 擊退保護
+穿著在身上時減少 4 ~ 8% 所受擊退，
+全套總共減少 16 ~ 32% 所受擊退。
+
+最高等級 Ⅱ
+## 適用物品
+- 頭盔
+- 胸甲
+- 護腿
+- 靴子
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|減少4%所受擊退|
+|Ⅱ|減少8%所受擊退|`,
+      sacrifice_experience: `# 獻祭經驗
+穿著在身上時減少 3% 所受傷害，
+但需要按照傷害比例扣除經驗值，
+經驗值不夠抵銷時無法觸發效果，
+全套總共減少 12% 所受傷害。
+
+最高等級 I
+## 適用物品
+- 頭盔
+- 胸甲
+- 護腿
+- 靴子
+## 衝突
+- 尖刺
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵`,
+      action_sound: `# 動作音效
+裝備在頭盔時許多行為發出可愛的音效！
+
+最大等級 Ⅰ
+## 種類
+目前共有4種音效，分別為:
+- 紲星燈
+- 琴葉茜
+- 琴葉葵
+- 結月緣
+## 適用裝備
+- 頭盔
+## 衝突
+音效彼此之間互相衝突
+單一頭盔只能存在一種音效
+## 獲取方式
+- 怪物浪潮Boss的掉落物`,
+      gourmand: `# 美食
+裝備在頭盔時食用食物增加 20 ~ 30% 飢餓值，
+存在飢餓狀態時無法觸發效果。
+
+最大等級 Ⅲ
+## 適用裝備
+- 頭盔
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加20%飢餓值|
+|Ⅱ|增加25%飢餓值|
+|Ⅲ|增加30%飢餓值|`,
+      buoyancy: `# 浮力
+裝備在鞘翅時減少 30 ~ 60% 重力。
+
+最大等級 Ⅲ
+## 適用裝備
+- 鞘翅
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|減少30%重力|
+|Ⅱ|減少45%重力|
+|Ⅲ|減少60%重力|`,
+      gale: `# 疾風
+鞘翅飛行時煙火加速持續延長 20 ~ 40% 時間。
+
+最大等級 Ⅲ
+## 適用裝備
+- 鞘翅
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|煙火加速持續延長20%時間|
+|Ⅱ|煙火加速持續延長30%時間|
+|Ⅲ|煙火加速持續延長40%時間|`,
+      nimble: `# 靈巧
+裝備在鞘翅時安全摔落高度增加 10 ~ 30 方塊。
+
+最大等級 Ⅲ
+## 適用物品
+- 鞘翅
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|安全摔落高度增加10方塊|
+|Ⅱ|安全摔落高度增加20方塊|
+|Ⅲ|安全摔落高度增加30方塊|`,
+      stubborn: `# 倔强
+裝備在胸甲剩餘血量少於 6 時增加 2 ~ 5 攻擊傷害。
+
+最高等級 Ⅳ
+## 適用物品
+- 胸甲
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加2攻擊傷害|
+|Ⅱ|增加3攻擊傷害|
+|Ⅲ|增加4攻擊傷害|
+|Ⅳ|增加5攻擊傷害|`,
+      fragile: `# 脆弱
+裝備在胸甲時，
+減少 6 ~ 18 最大生命值，
+增加 3 ~ 9 攻擊力。
+
+最大等級 Ⅲ
+## 適用裝備
+- 胸甲
+## 衝突
+無
+## 獲取方式
+- 魔幻之塔Boss的掉落物
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|減少6最大生命值，增加3攻擊力|
+|Ⅱ|減少12最大生命值，增加6攻擊力|
+|Ⅲ|減少18最大生命值，增加9攻擊力|`,
+      gravity: `# 重力
+裝備在胸甲時增加 40 ~ 100% 重力。
+
+最大等級 Ⅲ
+## 適用裝備
+- 胸甲
+## 衝突
+無
+## 獲取方式
+- 魔幻之塔Boss的掉落物
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加40%重力|
+|Ⅱ|增加70%重力|
+|Ⅲ|增加100%重力|`,
+      healthy: `# 健康
+裝備在胸甲時，
+獲得的正面狀態延長 20 ~ 40% 時效，
+獲得的負面狀態減少 10 ~ 30% 時效。
+
+最大等級 Ⅲ
+## 適用裝備
+- 胸甲
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|正面狀態延長20%時效，負面狀態減少10%時效|
+|Ⅱ|正面狀態延長30%時效，負面狀態減少20%時效|
+|Ⅲ|正面狀態延長40%時效，負面狀態減少30%時效|`,
+      steady_sneak: `# 穩重潛行
+裝備在護腿潛行時減少 10 ~ 20% 所受傷害，
+效果生效期間內減少 60% 移動速度，
+存在虛弱狀態時無法觸發效果。
+
+最大等級 Ⅲ
+## 適用物品
+- 護腿
+## 衝突
+- 迅捷潛行
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|潛行時減少10%所受傷害|
+|Ⅱ|潛行時減少15%所受傷害|
+|Ⅲ|潛行時減少20%所受傷害|`,
+      light_speed: `# 逐光疾走
+裝備在靴子身處光線大於或等於 10 的空間時，
+增加 25 ~ 40% 移動速度。
+
+最大等級 Ⅲ
+## 適用物品
+- 靴子
+## 衝突
+- 靈魂疾走
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|增加25%移動速度|
+|Ⅱ|增加32.5%移動速度|
+|Ⅲ|增加40%移動速度|`,
+      extension: `# 延伸
+工具的方塊互動距離增加 1 ~ 2 方塊。
+
+最大等級 Ⅲ
+## 適用裝備
+- 鎬
+- 鋤
+- 鏟
+- 斧
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|方塊互動距離增加1方塊|
+|Ⅱ|方塊互動距離增加1.5方塊|
+|Ⅲ|方塊互動距離增加2方塊|`,
+      overclocking: `# 超頻
+工具的方塊破壞速度增加 20 ~ 100%。
+
+最高等級 Ⅴ
+## 適用物品
+- 鎬
+- 鋤
+- 鏟
+- 斧
+## 衝突
+- 耐久
+- 絲綢之觸
+- 幸運
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|方塊破壞速度增加20%|
+|Ⅱ|方塊破壞速度增加40%|
+|Ⅲ|方塊破壞速度增加60%|
+|Ⅳ|方塊破壞速度增加80%|
+|Ⅴ|方塊破壞速度增加100%|`,
+      ore_refining: `# 礦石融煉
+鎬挖掘後掉落的礦石立即融煉成礦錠。
+
+最大等級 Ⅰ
+## 適用物品
+- 鎬
+## 衝突
+- 絲綢之觸
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵`,
+      auto_repair: `# 自動修補
+每 3 ~ 1 秒恢復 5% 損壞的耐久值，
+修復每 1 耐久值需消耗自身 5 ~ 3 經驗值，
+只有手持中或裝備中才觸發效果。
+
+最大等級 Ⅲ
+## 適用裝備
+- 所有可附魔物品
+## 衝突
+- 修補
+- 無限耐久
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 等級與效果
+|等級|效果|
+|:---:|:---:|
+|Ⅰ|每3秒恢復5%損壞的耐久值，需消耗自身5經驗值|
+|Ⅱ|每2秒恢復5%損壞的耐久值，需消耗自身4經驗值|
+|Ⅲ|每1秒恢復5%損壞的耐久值，需消耗自身3經驗值|`,
+      break_rescue: `# 損毀救援
+物品損毀時立即恢復全部耐久度，
+觸發效果後此附魔將消失。
+
+最大等級 Ⅰ
+## 適用裝備
+- 所有可附魔物品
+## 衝突
+- 無限耐久
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵`,
+      eternal: `# 不滅
+掉落物不會自然消失，
+也不會受到絕大多數的傷害。
+
+最高等級 Ⅰ
+## 適用裝備
+- 所有可附魔物品
+## 衝突
+無
+## 獲取方式
+- 怪物浪潮Boss的掉落物
+- 積分賽季達到王者的獎勵
+## 補充說明
+
+以下行為不會導致具有不滅附魔的物品消失:
+
+- 用火/岩漿燒
+- 丟在仙人掌上
+- 爆炸(TNT/凋零)
+- 5分鐘自然消失限制
+
+相反的，以下行為會導致物品消失:
+
+- 物品同時具有不滅和消失詛咒的狀況下噴裝
+- 在模式內噴裝未能撿回即退出
+- 將物品丟到虛空
+- /erase指令`,
+      infinite_durability: `# 無限耐久
+無論如何都不會消耗耐久度。
+
+最高等級 I
+
+## 適用物品
+- 所有可附魔物品
+
+## 衝突
+
+- 修補
+- 自動修補
+- 耐久
+- 損毀救援
+
+## 獲取方式
+
+- 王者戰爭贏得冠軍
+
+## 補充說明
+
+如果耐久度已經損耗，則敲上該特附後下一次使用會直接補滿耐久度
+`
+    };
+    const PAGES = [
+      { id: 'frozen', title: '冰凍' },
+      { id: 'bloodsucking', title: '吸血' },
+      { id: 'wisdom', title: '智慧' },
+      { id: 'critical_chance', title: '爆擊可能' },
+      { id: 'spear', title: '遠擊' },
+      { id: 'wind_blast', title: '風擊' },
+      { id: 'giganticize', title: '巨大化' },
+      { id: 'miniaturize', title: '迷你化' },
+      { id: 'knockback_resistance', title: '擊退保護' },
+      { id: 'sacrifice_experience', title: '獻祭經驗' },
+      { id: 'action_sound', title: '動作音效' },
+      { id: 'gourmand', title: '美食' },
+      { id: 'buoyancy', title: '浮力' },
+      { id: 'gale', title: '疾風' },
+      { id: 'nimble', title: '靈巧' },
+      { id: 'stubborn', title: '倔強' },
+      { id: 'fragile', title: '脆弱' },
+      { id: 'gravity', title: '重力' },
+      { id: 'healthy', title: '健康' },
+      { id: 'steady_sneak', title: '穩重潛行' },
+      { id: 'light_speed', title: '逐光疾走' },
+      { id: 'extension', title: '延伸' },
+      { id: 'overclocking', title: '超頻' },
+      { id: 'ore_refining', title: '礦物熔煉' },
+      { id: 'auto_repair', title: '自動修補' },
+      { id: 'break_rescue', title: '損毀救援' },
+      { id: 'eternal', title: '不滅' },
+      { id: 'infinite_durability', title: '無限耐久' },
+    ];
+
+    function getPath() {
+      return getHashId();
+    }
+
+    function fixImagePaths(md) {
+      return md.replace(/\]\(\.\//g, '](' + SECTION_ID + '/').replace(/src="\.\//g, 'src="' + SECTION_ID + '/');
+    }
+
+    function fixInternalLinks(md) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        const name = (p.replace(/^\.\//, '').replace(/\.md$/, '').split('?')[0].split('#')[0] || '').trim();
+        return name ? '](#' + name + ')' : '](' + p + ')';
+      });
+    }
+
+    function getHashId() {
+      try {
+        const raw = (window.location.hash || '').slice(1);
+        const id = decodeURIComponent(raw.split('?')[0].split('#')[0].trim());
+        return id || (PAGES[0] && PAGES[0].id) || 'frozen';
+      } catch (e) { return PAGES[0] && PAGES[0].id || 'frozen'; }
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = PAGES.map(p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${p.title}</a>`).join('');
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+        });
+      });
+    }
+
+    function loadPage(id) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      article.innerHTML = '';
+      loading.style.display = 'block';
+
+      const raw = EMBEDDED_PAGES[id];
+      if (raw === undefined) {
+        article.innerHTML = '<div class="error">無法載入此頁面</div>';
+      } else {
+        let content = fixImagePaths(raw);
+        content = fixInternalLinks(content);
+        marked.setOptions({ gfm: true, breaks: true });
+        article.innerHTML = marked.parse(content);
+      }
+      loading.style.display = 'none';
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('data-id') === id);
+      });
+    }
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+
+    document.getElementById('content').addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+      try {
+        const href = a.getAttribute('href') || '';
+        const hashIdx = href.indexOf('#');
+        if (hashIdx < 0) return;
+        const id = decodeURIComponent(href.slice(hashIdx + 1).split('?')[0].split('#')[0].trim());
+        if (!id || !PAGES.some(p => p.id === id)) return;
+        e.preventDefault();
+        window.location.hash = id;
+        loadPage(id);
+      } catch (err) {}
+    });
+
+    renderNav();
+    loadPage(getPath());
+  </script>
+</body>
+</html>

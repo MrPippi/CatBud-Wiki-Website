@@ -3,6 +3,10 @@
 貓芽唯一的非官方wiki  
 還在持續撰寫中
 
+## 網頁版 Wiki
+
+專案內含網頁版百科 `index.html`，可在瀏覽器中瀏覽所有 Markdown 內容。部署至 GitHub Pages、Netlify 等靜態託管後即可使用。
+
 ## [目錄(點我)](index.md)
 
 ## CatBud貓芽

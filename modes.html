@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模式 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="image/logo.png" alt="" class="site-logo-img">
+        貓芽伺服器 <span>Wiki</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html">貓芽 Wiki</a>
+      </div>
+      <a href="index.html" class="sidebar-back">← 返回首頁</a>
+      <div class="sidebar-section-title">模式</div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const SECTION_ID = 'modes';
+    const PAGES = [
+      { id: 'king_battle', title: '王者戰爭' },
+      { id: 'happy_anniversary', title: '快樂週年' },
+      { id: 'leisure_parkour', title: '休閒跑酷' },
+    ];
+
+    const EMBEDDED_PAGES = {
+      happy_anniversary: `# 周年快樂
+
+從地上的驚喜盒開出道具或金幣，時間結束時將所有金幣兌換成<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>!
+
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/> 只要參加就固定獲得月卡1天
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/item/menu/rank/iron_rank.png?raw=true" width="18" height="18"/> 鐵牌以上才能參加
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/check.png?raw=true" width="18" height="18"/> 死亡時背包物品不會掉落
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/check.png?raw=true" width="18" height="18"/> 結束後會將所有資料恢復成參加前的狀態
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/mob/steve.png?raw=true" width="18" height="18"/> 最多4人同時參加
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/warning.png?raw=true" width="18" height="18"/> 僅在10/02周年慶當周舉辦
+
+<img src="./mode_picture/happy_anniversary.png" width="558" height="153"/>
+
+## 模式介紹
+
+地圖內會散布非常多的驚喜盒<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/block/custom/surprise_box.png?raw=true" width="25" height="25"/>，你要做的就是在5分鐘內盡可能右鍵打開它，裡面可能會有...
+
+- 1~2金幣
+- 16顆風彈
+- 8顆終界珍珠
+- 飛濺迅捷藥水II
+- 點燃的TNT
+- 飛濺跳躍藥水II
+
+結算後會將你所獲得的金幣變成貓幣，並額外發放月卡1天
+
+### 遊戲流程
+
+20秒觀察準備->倒數5分鐘->結算->10秒後解散
+
+## 小研究
+
+1. 每個玩家頭上會有彩色頭帶
+2. 有可能掉進去跳不出來的坑...
+3. 周年慶當周每天21:30開始
+4. 組隊參加並不會平分貓幣，每個人獨立計算
+5. 驚喜盒內的物品只有打開的人才能拿
+6. 死亡會重生在初始點，不會噴裝
+
+## 更新紀錄
+
+|版本|更新內容|
+|:---:|:---:|
+|r5-b24|新模式「周年快樂」|
+|r5-b25|「周年快樂」改為有 5 個分流可選|`,
+      king_battle: `# 王者戰爭
+
+少受傷去保護排位點數金幣，撐到結束時最多金幣的獲得 無限耐久x1 !
+
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/> 王者以上才能參加
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/mob/steve.png?raw=true" width="18" height="18"/> 各隊伍隨機平均分配在3個分流中
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/check.png?raw=true" width="18" height="18"/> 冠軍獎品每個分流獨立發放一次
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/check.png?raw=true" width="18" height="18"/> 結束後會將所有資料恢復成參加前的狀態
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/mob/steve.png?raw=true" width="18" height="18"/> 最多4人同時參加
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/warning.png?raw=true" width="18" height="18"/> 結算時若產生複數第一名則隨機抽選冠軍
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/clock.png?raw=true" width="18" height="18"/> 僅在每月的最後一個禮拜日舉辦
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/warning.png?raw=true" width="18" height="18"/> 金幣僅結算在個人而不是隊伍
+
+<img src="./mode_picture/king_battle__big.png" width="558" height="153"/>
+
+## 模式介紹
+
+每個人會拿到與排位點數相關的金幣數量<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/item/custom/coin_of_king.png?raw=true" width="25" height="25"/>
+玩家在受到傷害會掉落 \`(身上當前金幣數量的5%)+0~3\` 個金幣
+每個人的金幣數量會實時顯示，當前持有最多金幣的玩家會發光
+結算時，身上持有最多金幣的人獲勝!
+
+*獎勵會透過郵件發放
+
+### 遊戲流程
+
+觀察地形準備->倒數10分鐘->結算->解散
+
+## 小研究
+
+1. 結束時會廣播通知所有人冠軍是誰
+2. 開始時間為晚上9:45
+3. 虛空傷害不會爆金幣
+4. 死亡不會噴裝，會重生在初始點
+5. 期間登出伺服器累積20秒會自動棄權
+6. 排位點數:金幣 = 5:1
+7. 平均掉落金幣=0.025n + 0~3
+
+## 更新紀錄
+
+|版本|更新內容|
+|:---:|:---:|
+|r5-b26|新模式「王者戰爭」，進場要求暫時下修至 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/item/menu/rank/iron_rank.png?raw=true" width="18" height="18"/> 鐵牌而不是 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/> 王者|
+|r5-b27|「王者戰爭」進場要求改回 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/> 王者|
+|r5-b28|能撿起自己掉落的「金幣」<br>掉落的金幣從 1% 增加至 5%|
+|r5-b30|「王者戰爭」會顯示所有人身上「金幣」的持有數量|
+|r5-b32|「王者戰爭」新增敘述「金幣僅結算在個人而不是隊伍」|
+|r5-b33|「王者戰爭」持有「金幣」最多的人將會發光|`,
+      leisure_parkour: `# 休閒跑酷
+
+在地圖內向前躍過重重阻礙，任何成員抵達終點即全隊通關!
+
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/check.png?raw=true" width="18" height="18"/> 結束後會將所有資料恢復成參加前的狀態
+<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/mob/steve.png?raw=true" width="18" height="18"/> 最多4人同時闖關
+
+<img src="./mode_picture/leisure_parkour.png" width="558" height="153"/>
+
+## 模式介紹
+
+在地圖內跑酷並尋找撤離點，抵達撤離點就通關
+如果卡住或者不想跑可以用/parkour quit離開
+
+### 地圖
+
+目前休閒跑酷共有4張地圖，分別是:
+
+- 中型地下城
+- 太空船
+- 天空遺跡
+- 石柱簇
+
+每次進入休閒跑酷時，會隨機選擇其中1張地圖開始
+
+### 位置記錄
+
+使用道具"紀錄當前位置"<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/item/menu/parkour/save.png?raw=true" width="25" height="25"/>可以記錄你當下的位置
+使用道具"返回記錄位置"<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/item/menu/parkour/location.png?raw=true" width="25" height="25"/>可以回到該位置
+位置紀錄沒有上限，但最多只會顯示最近紀錄的6個存檔點
+
+## 小研究
+
+1. 有計時器，精確到秒(遠離出生點4格以上才開始計時)
+2. 完成跑酷會廣播通知，如果不想看到可以在/config暫時屏蔽廣播通知
+3. 完成跑酷會寄信給通關的那一個人，信內包含通關時間
+4. 除了任務外，完成此模式沒有任何獎勵
+
+## 更新紀錄
+
+|版本|簡要更新內容|
+|:---:|:---:|
+|r5-b01|新增休閒跑酷|
+|r5-b13|禁止與容器互動，計時方法更新|`
+    };
+
+    function getPath() { return window.location.hash.slice(1) || PAGES[0].id; }
+    function fixImagePaths(md) { return md.replace(/\]\(\.\//g, '](' + SECTION_ID + '/').replace(/src="\.\//g, 'src="' + SECTION_ID + '/'); }
+    function fixInternalLinks(md) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        const name = p.replace(/^\.\//, '').replace(/\.md$/, '');
+        return name.includes('/') ? '](#' + name.split('/').pop() + ')' : '](#' + name + ')';
+      });
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = PAGES.map(p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${p.title}</a>`).join('');
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => { if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open'); });
+      });
+    }
+
+    function loadPage(id) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      article.innerHTML = '';
+      loading.style.display = 'block';
+      const raw = EMBEDDED_PAGES[id];
+      if (raw === undefined) {
+        article.innerHTML = '<div class="error">無法載入此頁面</div>';
+      } else {
+        let content = fixImagePaths(raw);
+        content = fixInternalLinks(content);
+        marked.setOptions({ gfm: true, breaks: true });
+        article.innerHTML = marked.parse(content);
+      }
+      loading.style.display = 'none';
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.getAttribute('data-id') === id));
+    }
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+    document.getElementById('content').addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+      try {
+        const href = a.getAttribute('href') || '';
+        const hashIdx = href.indexOf('#');
+        if (hashIdx < 0) return;
+        const id = decodeURIComponent(href.slice(hashIdx + 1).split('?')[0].split('#')[0].trim());
+        if (!id || !PAGES.some(p => p.id === id)) return;
+        e.preventDefault();
+        window.location.hash = id;
+        loadPage(id);
+      } catch (err) {}
+    });
+    renderNav();
+    loadPage(getPath());
+  </script>
+</body>
+</html>

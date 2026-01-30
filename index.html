@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>貓芽伺服器 Wiki - CatBud 非官方百科</title>
+  <meta name="description" content="貓芽伺服器 (tcpshield.catbud.net) 非官方百科，Java 版 1.21.6～1.21.11。附魔、指令、功能、指南、物品、模式介紹。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #0c0c10;
+      --bg-panel: #14141a;
+      --bg-card: #1a1a22;
+      --bg-hover: rgba(255,255,255,0.04);
+      --border: #2a2a34;
+      --border-light: #363642;
+      --text: #e8e8ed;
+      --text-soft: #a8a8b3;
+      --text-muted: #787885;
+      --accent: #66ac7f;
+      --accent-soft: rgba(102,172,127,0.12);
+      --accent-hover: #7abb92;
+      --link: #66ac7f;
+      --link-hover: #7abb92;
+      --link-visited: #8bc49e;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --header-h: 56px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      min-height: 100vh;
+      font-weight: 400;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('image/background.png') center/cover no-repeat;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body > * { position: relative; z-index: 1; }
+
+    /* ========== Header ========== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--header-h);
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      flex-shrink: 0;
+    }
+    .site-header-inner {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .site-logo:hover { color: var(--accent-hover); }
+    .site-logo span { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .header-nav a {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+    .header-nav a:hover {
+      color: var(--text);
+      background: var(--bg-hover);
+    }
+    @media (max-width: 900px) {
+      .header-nav { display: none; }
+    }
+
+    /* ========== Hero ========== */
+    .hero {
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1.5rem 3.5rem;
+      text-align: center;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('image/background.png') center/cover no-repeat;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(20,20,26,0.88) 0%, rgba(12,12,16,0.85) 50%);
+      z-index: 1;
+    }
+    .hero .hero-content { position: relative; z-index: 2; }
+    .hero.hidden { display: none; }
+    .hero-logo-wrap {
+      margin-bottom: 1.25rem;
+      line-height: 0;
+    }
+    .hero-logo {
+      width: 280px;
+      height: 280px;
+      max-width: min(280px, 90vw);
+      max-height: min(280px, 90vw);
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      animation: heroLogoLoop 3s ease-in-out infinite;
+      vertical-align: middle;
+    }
+    @keyframes heroLogoLoop {
+      0%, 100% { opacity: 0.9; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      margin: 0 0 2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+    .hero-meta-item i {
+      color: var(--accent);
+      font-size: 1rem;
+      width: 1.1em;
+      text-align: center;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-meta-item strong { color: var(--text); font-weight: 600; font-size: 0.95rem; line-height: 1.4; }
+    .hero-ip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 1rem;
+      font-family: ui-monospace, monospace;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: var(--accent);
+      cursor: pointer;
+      user-select: all;
+      transition: border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .hero-ip:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .hero-ip:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .hero-ip-wrap { position: relative; }
+    .hero-ip-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-ip-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .hero-ip-label i { color: var(--accent); font-size: 1rem; }
+    .copy-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 100%;
+      transform: translate(-50%, -0.5rem);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+      pointer-events: none;
+    }
+    .copy-toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -0.25rem);
+    }
+    .hero-version {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      align-items: center;
+    }
+    .hero-version-icon {
+      font-size: 1rem;
+      width: 1.1em;
+      text-align: center;
+      flex-shrink: 0;
+      animation: iconBlink 1.5s ease-in-out infinite;
+    }
+    @keyframes iconBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .hero-version .hero-version-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+    }
+    .hero-version-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .hero-version-detail {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+    .hero-version .rec { color: var(--accent); font-weight: 600; }
+    .hero-online .hero-online-count { color: var(--accent); font-weight: 600; }
+    .hero-cta-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem;
+      font-weight: 500;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .hero-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.65rem 1.35rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .hero-cta a i { font-size: 1.05rem; width: 1.1em; text-align: center; }
+    .hero-cta a:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102,172,127,0.35);
+    }
+    .hero-cta a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .hero-cta a.secondary {
+      background: rgba(102,172,127,0.08);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .hero-cta a.secondary:hover {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    /* ========== 網頁介紹 (首頁專用) ========== */
+    .intro-section {
+      width: 100%;
+      background: #111512;
+      border-top: 1px solid var(--border);
+    }
+    .intro-section.hidden { display: none !important; }
+    .intro-section-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 5rem;
+      text-align: center;
+    }
+    .intro-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 1rem;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .intro-section h2 i { opacity: 0.9; }
+    .intro-section p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin: 0 0 1.5rem;
+    }
+    .intro-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .intro-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .intro-links a i { font-size: 0.9em; }
+    .intro-links a:hover {
+      border-color: var(--accent);
+      background: rgba(102,172,127,0.2);
+    }
+    .layout.hidden { display: none !important; }
+    .home-sections.hidden { display: none !important; }
+    #article.hidden { display: none !important; }
+
+    /* ========== Layout (sidebar + content) ========== */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - var(--header-h) - 140px);
+    }
+    .sidebar {
+      width: 280px;
+      min-width: 280px;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 0;
+      overflow-y: auto;
+      position: sticky;
+      top: var(--header-h);
+      align-self: flex-start;
+      max-height: calc(100vh - var(--header-h));
+    }
+    .sidebar-header {
+      padding: 0 1.25rem 1.25rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header a {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .sidebar-header a:hover { color: var(--accent-hover); }
+    .nav-section { margin-bottom: 0.75rem; }
+    .nav-section-title {
+      padding: 0.5rem 1.25rem 0.25rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .nav-link {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      margin-left: 0;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .nav-link:hover {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+    .nav-link.active {
+      border-left-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .nav-link.sub { padding-left: 2rem; font-size: 0.9rem; font-weight: 400; }
+    .content {
+      flex: 1;
+      padding: 2.5rem 3.5rem 4rem;
+      max-width: 880px;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+    .content-inner { animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .content h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-light);
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .content h2 { font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; color: var(--text); }
+    .content h3 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--text-soft); }
+    .content p { margin: 0.75rem 0; color: var(--text-soft); }
+    .content ul, .content ol { margin: 0.75rem 0; padding-left: 1.75rem; color: var(--text-soft); }
+    .content li { margin: 0.35rem 0; }
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .content th, .content td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      background: var(--bg-card);
+    }
+    .content th { background: var(--bg-panel); font-weight: 600; color: var(--text); }
+    .content td { color: var(--text-soft); }
+    .content blockquote {
+      margin: 1.25rem 0;
+      padding: 0.75rem 1.25rem;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--text-muted);
+    }
+    .content a { color: var(--link); text-decoration: none; transition: color 0.15s; }
+    .content a:hover { color: var(--link-hover); text-decoration: underline; }
+    .content a:visited { color: var(--link-visited); }
+    .content img { max-width: 100%; height: auto; vertical-align: middle; border-radius: var(--radius-sm); }
+    .content code {
+      background: var(--bg-card);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+      color: var(--accent);
+    }
+    .content pre {
+      overflow-x: auto;
+      background: var(--bg-card);
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+    .content pre code { padding: 0; background: none; border: none; color: var(--text-soft); }
+    .loading { color: var(--text-muted); padding: 3rem 2rem; text-align: center; }
+    .error {
+      color: var(--text-muted);
+      padding: 3rem 2rem;
+      text-align: center;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      z-index: 100;
+      box-shadow: 0 6px 20px rgba(102,172,127,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sidebar-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(102,172,127,0.4);
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        transition: left 0.25s ease;
+        z-index: 99;
+        max-height: 100vh;
+        top: 0;
+        box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+      }
+      .sidebar.open { left: 0; }
+      .content { padding: 1.5rem 1.25rem 2rem; }
+      .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+      .hero { padding: 2rem 1rem 2.5rem; }
+      .hero-logo { width: 200px; height: 200px; }
+      .hero-title { font-size: 1.75rem; }
+      .hero-meta { flex-direction: column; gap: 1rem; }
+    }
+
+    /* ========== Footer ========== */
+    .site-footer {
+      margin-top: auto;
+      padding: 2rem 1.5rem;
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .site-footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .site-footer p { margin: 0.5rem 0; }
+    .site-footer a {
+      color: var(--link);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer .brand { color: var(--accent); font-weight: 600; }
+    .site-footer i { opacity: 0.85; font-size: 0.9em; }
+
+    .sidebar-back {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+    .sidebar-back:hover { color: var(--accent); }
+    .sidebar-section-title {
+      padding: 0.5rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo" id="headerLogo">貓芽伺服器 <span>Wiki</span></a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="./image/logo.png" alt="貓芽伺服器" class="hero-logo" width="280" height="280">
+      </div>
+      <h1 class="hero-title">貓芽伺服器</h1>
+      <p class="hero-subtitle">非官方百科 · 還在持續撰寫中</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item hero-ip-wrap">
+          <div class="hero-ip-block">
+            <span class="hero-ip-label"><i class="fa-solid fa-server" aria-hidden="true"></i>伺服器 IP</span>
+            <code class="hero-ip" id="heroIp" role="button" tabindex="0" title="點擊複製" aria-label="點擊複製伺服器 IP tcpshield.catbud.net">tcpshield.catbud.net</code>
+          </div>
+          <span class="copy-toast" id="copyToast" role="status" aria-live="polite"></span>
+        </div>
+        <div class="hero-meta-item hero-version">
+          <i class="fa-solid fa-bolt hero-version-icon" aria-hidden="true"></i>
+          <span class="hero-version-wrap">
+            <span class="hero-version-num">1.21.6</span>
+            <span class="hero-version-detail">Java 版 · 1.21.6 ~ 1.21.11 登入 · <span class="rec">推薦 1.21.11</span></span>
+          </span>
+        </div>
+        <div class="hero-meta-item hero-online">
+          <i class="fa-solid fa-users" aria-hidden="true"></i>
+          <strong>線上人數</strong>
+          <span class="hero-online-count" id="heroOnline">取得中…</span>
+        </div>
+      </div>
+      <p class="hero-cta-label">加入社群或查看入門指南</p>
+      <div class="hero-cta">
+        <a href="https://discord.gg/catbud" target="_blank" rel="noopener" aria-label="加入 Discord（新分頁開啟）"><i class="fa-brands fa-discord"></i>加入 Discord</a>
+        <a href="https://drive.google.com/file/d/1fobEcg0DI7lwbmtKBDyWiLmoyVcFZb3s/view" target="_blank" rel="noopener" class="secondary" aria-label="萌新手冊（新分頁開啟）"><i class="fa-solid fa-book"></i>萌新手冊</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-section" id="introSection">
+    <div class="intro-section-inner">
+      <h2><i class="fa-solid fa-circle-info"></i>網頁介紹</h2>
+      <p>本 Wiki 為貓芽伺服器（CatBud）非官方百科，收錄特殊附魔、指令、功能、指南、物品與遊戲模式等介紹，持續更新中。可從上方導航或以下連結進入各分類。</p>
+      <div class="intro-links" id="introLinks"></div>
+    </div>
+  </section>
+
+  <div class="layout" id="mainLayout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#index">貓芽 Wiki</a>
+      </div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><i class="fa-solid fa-leaf"></i> <span class="brand">貓芽伺服器</span> · 非官方百科 · <i class="fa-solid fa-server"></i> 伺服器 IP <strong>tcpshield.catbud.net</strong> · <i class="fa-solid fa-bolt"></i> Java 版 1.21.6</p>
+      <p>本 Wiki 使用圖片均來自 <a href="https://discord.gg/catbud" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i>貓芽伺服器</a> 及 <a href="https://github.com/CatBudMC" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const NAV = [
+      { title: '首頁', path: 'index' },
+      {
+        title: '特殊附魔',
+        path: 'enchantments/frozen',
+        desc: '查看所有特殊附魔的功能',
+        children: [
+          { title: '冰凍', path: 'enchantments/frozen' },
+          { title: '吸血', path: 'enchantments/bloodsucking' },
+          { title: '智慧', path: 'enchantments/wisdom' },
+          { title: '爆擊可能', path: 'enchantments/critical_chance' },
+          { title: '遠擊', path: 'enchantments/spear' },
+          { title: '風擊', path: 'enchantments/wind_blast' },
+          { title: '巨大化', path: 'enchantments/giganticize' },
+          { title: '迷你化', path: 'enchantments/miniaturize' },
+          { title: '擊退保護', path: 'enchantments/knockback_resistance' },
+          { title: '獻祭經驗', path: 'enchantments/sacrifice_experience' },
+          { title: '動作音效', path: 'enchantments/action_sound' },
+          { title: '美食', path: 'enchantments/gourmand' },
+          { title: '浮力', path: 'enchantments/buoyancy' },
+          { title: '疾風', path: 'enchantments/gale' },
+          { title: '靈巧', path: 'enchantments/nimble' },
+          { title: '倔強', path: 'enchantments/stubborn' },
+          { title: '脆弱', path: 'enchantments/fragile' },
+          { title: '重力', path: 'enchantments/gravity' },
+          { title: '健康', path: 'enchantments/healthy' },
+          { title: '穩重潛行', path: 'enchantments/steady_sneak' },
+          { title: '逐光疾走', path: 'enchantments/light_speed' },
+          { title: '延伸', path: 'enchantments/extension' },
+          { title: '超頻', path: 'enchantments/overclocking' },
+          { title: '礦物熔煉', path: 'enchantments/ore_refining' },
+          { title: '自動修補', path: 'enchantments/auto_repair' },
+          { title: '損毀救援', path: 'enchantments/break_rescue' },
+          { title: '不滅', path: 'enchantments/eternal' },
+          { title: '無限耐久', path: 'enchantments/infinite_durability' },
+        ]
+      },
+      {
+        title: '指令',
+        path: 'commands/to',
+        desc: '伺服器指令說明',
+        children: [
+          { title: '/to', path: 'commands/to' },
+          { title: 'adless', path: 'commands/adless' },
+          { title: 'tester', path: 'commands/tester' },
+        ]
+      },
+      {
+        title: '功能',
+        path: 'functions/sale',
+        desc: '上架、玩家資料、任務等',
+        children: [
+          { title: '上架功能', path: 'functions/sale' },
+          { title: '玩家資料與統計', path: 'functions/player' },
+          { title: 'task', path: 'functions/task' },
+        ]
+      },
+      {
+        title: '指南',
+        path: 'guides/to_list',
+        desc: '公共傳點與實用列表',
+        children: [
+          { title: '公共傳點列表', path: 'guides/to_list' },
+        ]
+      },
+      {
+        title: '物品',
+        path: 'items/curious_cat',
+        desc: '特色物品介紹',
+        children: [
+          { title: '好奇貓', path: 'items/curious_cat' },
+        ]
+      },
+      {
+        title: '模式',
+        path: 'modes/king_battle',
+        desc: '遊戲模式說明',
+        children: [
+          { title: '王者戰爭', path: 'modes/king_battle' },
+          { title: '快樂週年', path: 'modes/happy_anniversary' },
+          { title: '休閒跑酷', path: 'modes/leisure_parkour' },
+        ]
+      },
+    ];
+
+    const SECTIONS = NAV.filter(s => s.children);
+    const SECTION_PAGES = {
+      'enchantments/frozen': 'enchantments.html',
+      'commands/to': 'commands.html',
+      'functions/sale': 'functions.html',
+      'guides/to_list': 'guides.html',
+      'items/curious_cat': 'items.html',
+      'modes/king_battle': 'modes.html',
+    };
+
+    function getSection(path) {
+      if (path === 'index') return null;
+      return SECTIONS.find(s => path === s.path || path.startsWith(s.path.split('/')[0] + '/')) || null;
+    }
+
+    function renderNav(path) {
+      const nav = document.getElementById('nav');
+      const isHome = path === 'index';
+      let html = '';
+      if (isHome) {
+        html += `<div class="nav-section-title">選擇分類</div>`;
+        SECTIONS.forEach(section => {
+          const href = SECTION_PAGES[section.path] || 'index.html#' + section.path;
+          html += `<a class="nav-link sub" href="${href}" data-path="${section.path}">${section.title}</a>`;
+        });
+      } else {
+        const section = getSection(path);
+        html += `<a class="sidebar-back" href="#index">← 返回首頁</a>`;
+        if (section) {
+          html += `<div class="sidebar-section-title">${section.title}</div>`;
+          section.children.forEach(child => {
+            html += `<a class="nav-link sub" href="#${child.path}" data-path="${child.path}">${child.title}</a>`;
+          });
+        }
+      }
+      nav.innerHTML = html;
+      nav.querySelectorAll('.nav-link, .sidebar-back').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+        });
+      });
+    }
+
+    const SECTION_ICONS = {
+      'enchantments/frozen': 'fa-wand-magic-sparkles',
+      'commands/to': 'fa-terminal',
+      'functions/sale': 'fa-gear',
+      'guides/to_list': 'fa-book-open',
+      'items/curious_cat': 'fa-box',
+      'modes/king_battle': 'fa-gamepad',
+    };
+    function renderIntroSection() {
+      const el = document.getElementById('introLinks');
+      if (!el) return;
+      el.innerHTML = SECTIONS.map(s => {
+        const href = SECTION_PAGES[s.path] || 'index.html#' + s.path;
+        const icon = SECTION_ICONS[s.path] || 'fa-folder';
+        return `<a href="${href}"><i class="fa-solid ${icon}"></i>${s.title}</a>`;
+      }).join('');
+    }
+
+    function getPath() {
+      const hash = window.location.hash.slice(1) || 'index';
+      return hash;
+    }
+
+    function getBasePath(path) {
+      const last = path.lastIndexOf('/');
+      return last === -1 ? '' : path.slice(0, last + 1);
+    }
+
+    function fixImagePaths(md, basePath) {
+      if (!basePath) return md;
+      return md.replace(/\]\(\.\//g, '](' + basePath).replace(/src="\.\//g, 'src="' + basePath);
+    }
+
+    function resolvePath(link, basePath) {
+      link = link.replace(/\.md$/, '').trim();
+      if (link.startsWith('./')) return basePath + link.slice(2);
+      if (link.startsWith('../')) {
+        const base = basePath.replace(/[^/]+\/$/, '');
+        return base + link.replace(/^\.\.\//, '');
+      }
+      return basePath ? basePath + link : link;
+    }
+    function fixInternalLinks(md, basePath) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        return '](#' + resolvePath(p, basePath) + ')';
+      });
+    }
+
+    function toggleHero(show) {
+      document.getElementById('hero').classList.toggle('hidden', !show);
+    }
+
+    async function loadPage(path) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      const mainLayout = document.getElementById('mainLayout');
+      const introSection = document.getElementById('introSection');
+      const isHome = path === 'index';
+
+      toggleHero(isHome);
+      if (mainLayout) mainLayout.classList.toggle('hidden', isHome);
+      if (introSection) introSection.classList.toggle('hidden', !isHome);
+
+      if (isHome) {
+        renderIntroSection();
+        renderNav(path);
+        return;
+      }
+
+      renderNav(path);
+      article.innerHTML = '';
+      loading.style.display = 'block';
+
+      const file = path + '.md';
+      let raw = '';
+      try {
+        const res = await fetch(file);
+        if (!res.ok) throw new Error();
+        raw = await res.text();
+      } catch (e) {
+        loading.style.display = 'none';
+        article.innerHTML = `<div class="error">無法載入此頁面</div>`;
+        return;
+      }
+      loading.style.display = 'none';
+
+      const basePath = getBasePath(path);
+      raw = fixImagePaths(raw, basePath);
+      raw = fixInternalLinks(raw, basePath);
+
+      marked.setOptions({ gfm: true, breaks: true });
+      article.innerHTML = marked.parse(raw);
+
+      article.querySelectorAll('a[href^="#"]').forEach(a => {
+        const href = a.getAttribute('href').slice(1);
+        if (href && NAV.some(s => (s.children || []).some(c => c.path === href) || s.path === href)) {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.hash = href;
+          });
+        }
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('data-path') === path);
+      });
+    }
+
+    (function() {
+      const ipEl = document.getElementById('heroIp');
+      const toast = document.getElementById('copyToast');
+      if (!ipEl || !toast) return;
+      function showCopied() {
+        toast.innerHTML = '<i class="fa-solid fa-check"></i> 已複製到剪貼簿';
+        toast.classList.add('show');
+        toast.setAttribute('aria-label', '已複製到剪貼簿');
+        clearTimeout(toast._hide);
+        toast._hide = setTimeout(() => {
+          toast.classList.remove('show');
+          toast.innerHTML = '';
+          toast.removeAttribute('aria-label');
+        }, 1800);
+      }
+      function doCopy() {
+        navigator.clipboard.writeText('tcpshield.catbud.net').then(showCopied);
+      }
+      ipEl.addEventListener('click', doCopy);
+      ipEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          doCopy();
+        }
+      });
+    })();
+
+    (function() {
+      const el = document.getElementById('heroOnline');
+      if (!el) return;
+      fetch('https://api.mcsrvstat.us/2/tcpshield.catbud.net')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data && data.online && data.players) {
+            var o = (data.players.online != null) ? data.players.online : 0;
+            var m = (data.players.max != null) ? data.players.max : 0;
+            el.textContent = m > 0 ? o + ' / ' + m + ' 人在線' : o + ' 人在線';
+          } else {
+            el.textContent = '離線';
+          }
+        })
+        .catch(function() { el.textContent = '—'; });
+    })();
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+    document.getElementById('headerLogo').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.hash = 'index';
+    });
+    document.querySelector('.sidebar-header a').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.hash = 'index';
+    });
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+    loadPage(getPath());
+  </script>
+</body>
+</html>

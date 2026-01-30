@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>功能 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="image/logo.png" alt="" class="site-logo-img">
+        貓芽伺服器 <span>Wiki</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html">貓芽 Wiki</a>
+      </div>
+      <a href="index.html" class="sidebar-back">← 返回首頁</a>
+      <div class="sidebar-section-title">功能</div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const SECTION_ID = 'functions';
+    const PAGES = [
+      { id: 'sale', title: '上架功能' },
+      { id: 'player', title: '玩家資料與統計' },
+      { id: 'task', title: 'task' },
+    ];
+
+    const EMBEDDED_PAGES = {
+      sale: `# 上架功能
+
+## /sale [amount]
+
+取代箱子商店的好方法!
+<img src="./function_picture/sale.png" width=400>
+
+## 使用方法
+
+在貓芽Discord群組內的[店面](https://discord.com/channels/1278590147193081947/1379683775562383420)或[地繪](https://discord.com/channels/1278590147193081947/1379684060565213316)，使用/sale將遊戲內手上的物品以[amount]價格上架到該頻道內
+買家可以透過點擊按鈕來購買商品
+賣家點擊按鈕會將物品下架
+當刊登在 Discord 的 /sale 被他人購買時會提示訊息和音效
+
+## 注意事項
+
+1. 使用/sale上架商品需要月卡在有效期間，如果月卡過期商品不會消失(但後續無法再上架)
+2. 買家必須遊戲內在線才能購買
+3. 購買後，商品會直接放到背包內，放不下會丟在地上
+4. 上述功能必須在[貓芽Discord群組](https://discord.gg/catbud)內先綁定帳號才能使用
+
+## 更新紀錄
+
+|版本|更新內容|
+|:---:|:---:|
+|r4-b67|月卡福利新增/sale|
+|r4-b68|修復嚴重漏洞、顯示購買人資訊、賣家回收功能|
+|r5-b22|修復「盾牌」沒有顯示其持有的「附魔」清單<br>「鍛造模板」沒有顯示「類型」|
+|r5-b25|「配置」新增「Discord 商品售出通知」|
+|r5-b26|「Discord 商品售出通知」顯示的物品名稱<br>會優先使用「鐵砧」更改的別名|`,
+      player: `# 玩家資料與玩家統計
+
+不需要在遊戲內就可以知道玩家的在線狀態與統計資料了!
+
+## 功能介紹
+
+### 玩家資料
+
+顯示該玩家的Minecraft ID、UUID、首次登入時間
+如果玩家不在線會顯示最後上線時間
+如果被封鎖會顯示封鎖原因
+
+### 玩家統計
+
+顯示該玩家的部分統計資料，與遊戲內ESC->統計內的資料相同
+
+## 使用方法
+
+[PC]在貓芽Discord群組內，對著成員的頭像點右鍵，點選應用程式
+[Android]在貓芽Discord群組內，點進去成員的頭像，點右上方三點，點應用程式
+
+## 注意事項
+
+1. 要查詢的成員必須要綁定帳號才能進行查詢
+2. 只能在[貓芽Discord群組](https://discord.gg/catbud)內使用
+
+## 更新紀錄
+
+|版本|簡要更新內容|
+|:---:|:---:|
+|r4-b70|Discord應用程式新增玩家統計、玩家資料功能|`,
+      task: `# 任務
+
+完成任務獲得獎勵
+
+## 任務介紹
+
+貓芽內最主要獲得貓幣<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>和排位點數<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>的方法
+任務每日00:00(UTC+8)刷新
+一般玩家每日2個任務，月卡玩家每日3個任務，可能刷到重複的任務
+
+## 任務列表
+
+|任務名稱|任務獎勵|
+|:---:|----|
+|完成休閒跑酷|30 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+120 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|完成方舟生存|40 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+160 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|遊玩空降戰域|10 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+40 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|遊玩空降戰域並排名於前半段|20 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+80 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|遊玩怪物浪潮|10 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+40 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|遊玩怪物浪潮並擊殺boss|20 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+80 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|遊玩魔幻之塔|10 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+40 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|公共頻道聊天|5 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+20 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|線上累計時長|5 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/currency.png?raw=true" width="18" height="18"/>+20 <img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+
+## 更新紀錄
+
+|版本|簡要更新內容|
+|:---:|:---:|
+|r0-b12 (Beta)|新增/task|
+|r1-b13|新增任務「公共頻道聊天」、「完成方舟生存」|
+|r1-b15|新增任務「遊玩魔幻之塔」|
+|r2-b00|任務獎勵新增<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>|
+|r2-b12|整體獲得的<img src="https://github.com/CatBudMC/ResourcePack/blob/master/assets/minecraft/textures/emoji/rank.png?raw=true" width="18" height="18"/>大幅上調、「完成方舟生存」獲得的貓幣上調|
+|r3-b28|「遊玩怪物浪潮」的時間要求從3分鐘改為1分鐘|
+|r4-b01|任務「城堡戰爭」取消備註「不包含自訂場」|
+|r4-b59|將城堡戰爭系列任務改為空降戰域|
+|r5-b01|新增任務「完成休閒跑酷」|
+|r5-b02|任務「完成休閒跑酷」的獎勵下調|`
+    };
+
+    function getPath() { return window.location.hash.slice(1) || PAGES[0].id; }
+    function fixImagePaths(md) { return md.replace(/\]\(\.\//g, '](' + SECTION_ID + '/').replace(/src="\.\//g, 'src="' + SECTION_ID + '/'); }
+    function fixInternalLinks(md) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        const name = p.replace(/^\.\//, '').replace(/\.md$/, '');
+        return name.includes('/') ? '](#' + name.split('/').pop() + ')' : '](#' + name + ')';
+      });
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = PAGES.map(p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${p.title}</a>`).join('');
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => { if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open'); });
+      });
+    }
+
+    function loadPage(id) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      article.innerHTML = '';
+      loading.style.display = 'block';
+      const raw = EMBEDDED_PAGES[id];
+      if (raw === undefined) {
+        article.innerHTML = '<div class="error">無法載入此頁面</div>';
+      } else {
+        let content = fixImagePaths(raw);
+        content = fixInternalLinks(content);
+        marked.setOptions({ gfm: true, breaks: true });
+        article.innerHTML = marked.parse(content);
+      }
+      loading.style.display = 'none';
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.getAttribute('data-id') === id));
+    }
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+    document.getElementById('content').addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+      try {
+        const href = a.getAttribute('href') || '';
+        const hashIdx = href.indexOf('#');
+        if (hashIdx < 0) return;
+        const id = decodeURIComponent(href.slice(hashIdx + 1).split('?')[0].split('#')[0].trim());
+        if (!id || !PAGES.some(p => p.id === id)) return;
+        e.preventDefault();
+        window.location.hash = id;
+        loadPage(id);
+      } catch (err) {}
+    });
+    renderNav();
+    loadPage(getPath());
+  </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指令 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="image/logo.png" alt="" class="site-logo-img">
+        貓芽伺服器 <span>Wiki</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html">首頁</a>
+        <a href="enchantments.html">特殊附魔</a>
+        <a href="commands.html">指令</a>
+        <a href="functions.html">功能</a>
+        <a href="guides.html">指南</a>
+        <a href="items.html">物品</a>
+        <a href="modes.html">模式</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html">貓芽 Wiki</a>
+      </div>
+      <a href="index.html" class="sidebar-back">← 返回首頁</a>
+      <div class="sidebar-section-title">指令</div>
+      <nav id="nav"></nav>
+    </aside>
+    <main class="content" id="content">
+      <div class="loading" id="loading">載入中…</div>
+      <div id="article" class="content-inner"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="選單">≡</button>
+
+  <script>
+    const SECTION_ID = 'commands';
+    const PAGES = [
+      { id: 'to', title: '/to' },
+      { id: 'adless', title: 'adless' },
+      { id: 'tester', title: 'tester' },
+    ];
+
+    const EMBEDDED_PAGES = {
+      to: `# /to
+
+玩家可以自行設置、傳送、刪除公共傳點
+
+## 語法
+
+\`/to by <ID>\`
+傳送到<ID>的公共傳點
+
+\`/to set\`
+在玩家所在位置設置公共傳點，只能設置一個
+再次輸入會覆蓋位置
+
+\`/to clear\`
+刪除已設置的公共傳點
+
+## 參數
+
+\`<ID>\` : Minecraft ID
+
+## 注意事項
+
+- 所有人都能傳送至公共傳點，但設置人的月卡必須在有效期間才能傳送
+
+## 範例
+
+如果要傳送到YuanHua0707的公共傳點，輸入\`/to by YuanHua0707\`即可
+
+## 參見
+[公共傳點列表](guides.html#to_list)`,
+      adless: `# /adless
+
+一個專門用來屏蔽廣告頻道的指令
+
+## 語法
+
+\`/adless (extand)\`
+將屏蔽廣告時間延長 4 小時，最多 12 小時
+
+\`/adless clear\`
+清除屏蔽廣告時間
+
+\`/adless left\`
+查詢屏蔽廣告時間還剩多久
+
+## 更新紀錄
+
+|版本|更新內容|
+|:---:|:---:|
+|r4-b22|新指令「/adless」|`,
+      tester: `# /tester
+
+進入測試服的唯一方法
+
+## 語法
+
+\`/tester\`
+前往或離開測試服
+
+## 注意事項
+
+- 需要有月卡才能前往測試服
+
+## 更新紀錄
+
+|版本|更新內容|
+|:---:|:---:|
+|r1-b00|新增 \`/tester\` 指令|`
+    };
+
+    function getPath() { return window.location.hash.slice(1) || PAGES[0].id; }
+    function fixImagePaths(md) { return md.replace(/\]\(\.\//g, '](' + SECTION_ID + '/').replace(/src="\.\//g, 'src="' + SECTION_ID + '/'); }
+    function fixInternalLinks(md) {
+      return md.replace(/\]\(([^)]*\.md)\)/g, (_, p) => {
+        if (p.startsWith('http')) return '](' + p + ')';
+        const name = p.replace(/^\.\.\//, '').replace(/\.md$/, '');
+        if (name.includes('/')) return '](#' + name.split('/').pop() + ')';
+        return '](#' + name + ')';
+      });
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = PAGES.map(p => `<a class="nav-link" href="#${p.id}" data-id="${p.id}">${p.title}</a>`).join('');
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => { if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open'); });
+      });
+    }
+
+    function loadPage(id) {
+      const article = document.getElementById('article');
+      const loading = document.getElementById('loading');
+      article.innerHTML = '';
+      loading.style.display = 'block';
+      const raw = EMBEDDED_PAGES[id];
+      if (raw === undefined) {
+        article.innerHTML = '<div class="error">無法載入此頁面</div>';
+      } else {
+        let content = fixImagePaths(raw);
+        content = fixInternalLinks(content);
+        marked.setOptions({ gfm: true, breaks: true });
+        article.innerHTML = marked.parse(content);
+      }
+      loading.style.display = 'none';
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.getAttribute('data-id') === id));
+    }
+
+    document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    window.addEventListener('hashchange', () => loadPage(getPath()));
+    document.getElementById('content').addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+      try {
+        const href = a.getAttribute('href') || '';
+        const hashIdx = href.indexOf('#');
+        if (hashIdx < 0) return;
+        const id = decodeURIComponent(href.slice(hashIdx + 1).split('?')[0].split('#')[0].trim());
+        if (!id || !PAGES.some(p => p.id === id)) return;
+        e.preventDefault();
+        window.location.hash = id;
+        loadPage(id);
+      } catch (err) {}
+    });
+    renderNav();
+    loadPage(getPath());
+  </script>
+</body>
+</html>
