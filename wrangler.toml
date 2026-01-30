@@ -1,0 +1,7 @@
+# Cloudflare Pages / Workers 靜態資源部署
+# 專案為純靜態 Wiki，無需 build，直接以專案根目錄為輸出
+name = "catbud-wiki"
+compatibility_date = "2026-01-30"
+
+[assets]
+directory = "."
