@@ -9,24 +9,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="wiki-section.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="site-header-inner">
-      <a href="index.html" class="site-logo">
-        <img src="image/logo.png" alt="" class="site-logo-img">
-        貓芽伺服器 <span>Wiki</span>
-      </a>
-      <nav class="header-nav">
-        <a href="index.html">首頁</a>
-        <a href="enchantments.html">特殊附魔</a>
-        <a href="commands.html">指令</a>
-        <a href="functions.html">功能</a>
-        <a href="guides.html">指南</a>
-        <a href="items.html">物品</a>
-        <a href="modes.html">模式</a>
-      </nav>
+      <a href="index.html" class="site-logo">貓芽伺服器 <span>Wiki</span></a>
+      <div class="header-actions">
+        <a href="to_list.html" class="header-to-list" aria-label="公共傳點列表"><i class="fa-solid fa-map-location-dot"></i> 公共傳點</a>
+        <div class="header-dropdown" id="headerDropdown">
+          <button type="button" class="header-dropdown-trigger" id="headerDropdownTrigger" aria-expanded="false" aria-haspopup="true" aria-controls="headerDropdownMenu">
+            <i class="fa-solid fa-bars"></i> 導航
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="header-dropdown-menu" id="headerDropdownMenu" role="menu">
+            <div class="header-dropdown-menu-group-title">Wiki 分類</div>
+            <a href="index.html" role="menuitem"><i class="fa-solid fa-house"></i> 首頁</a>
+            <a href="enchantments.html" role="menuitem"><i class="fa-solid fa-wand-magic-sparkles"></i> 特殊附魔</a>
+            <a href="commands.html" role="menuitem"><i class="fa-solid fa-terminal"></i> 指令</a>
+            <a href="functions.html" role="menuitem"><i class="fa-solid fa-gear"></i> 功能</a>
+            <a href="items.html" role="menuitem"><i class="fa-solid fa-box"></i> 物品</a>
+            <a href="modes.html" role="menuitem"><i class="fa-solid fa-gamepad"></i> 模式</a>
+            <div class="menu-divider"></div>
+            <div class="header-dropdown-menu-group-title">其他教學連結</div>
+            <a href="https://discord.gg/catbud" target="_blank" rel="noopener" role="menuitem" aria-label="加入 Discord（新分頁開啟）"><i class="fa-brands fa-discord"></i> 加入 Discord</a>
+            <a href="https://drive.google.com/file/d/1fobEcg0DI7lwbmtKBDyWiLmoyVcFZb3s/view" target="_blank" rel="noopener" role="menuitem" aria-label="萌新手冊（新分頁開啟）"><i class="fa-solid fa-book"></i> 萌新手冊</a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -93,7 +104,7 @@
 如果要傳送到YuanHua0707的公共傳點，輸入\`/to by YuanHua0707\`即可
 
 ## 參見
-[公共傳點列表](guides.html#to_list)`,
+[公共傳點列表](to_list.html)`,
       adless: `# /adless
 
 一個專門用來屏蔽廣告頻道的指令
@@ -172,6 +183,27 @@
     }
 
     document.getElementById('sidebarToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+    (function() {
+      const dropdown = document.getElementById('headerDropdown');
+      const trigger = document.getElementById('headerDropdownTrigger');
+      const menu = document.getElementById('headerDropdownMenu');
+      if (!dropdown || !trigger || !menu) return;
+      function close() {
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+      function toggle() {
+        dropdown.classList.toggle('open');
+        const isOpen = dropdown.classList.contains('open');
+        trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggle();
+      });
+      document.addEventListener('click', function() { close(); });
+      menu.addEventListener('click', function(e) { e.stopPropagation(); });
+    })();
     window.addEventListener('hashchange', () => loadPage(getPath()));
     document.getElementById('content').addEventListener('click', (e) => {
       const a = e.target.closest('a[href*="#"]');
