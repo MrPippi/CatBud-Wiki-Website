@@ -8,6 +8,7 @@
 
 | 項目 | 說明 |
 |------|------|
+| **網頁** | [https://mrpippi.github.io/CatBud-Wiki-Website/](https://mrpippi.github.io/CatBud-Wiki-Website/) |
 | **伺服器 IP** | `tcpshield.catbud.net` |
 | **版本** | Java 版 1.21.6 ~ 1.21.11 登入，推薦 1.21.11 |
 | **萌新手冊** | [Google 雲端（BlueRiver1214 製作）](https://drive.google.com/file/d/1fobEcg0DI7lwbmtKBDyWiLmoyVcFZb3s/view) |
