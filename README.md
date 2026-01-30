@@ -4,35 +4,15 @@
 
 ---
 
-## 快速連結
+## 網頁連結
 
-| 項目 | 說明 |
-|------|------|
-| **網頁** | [https://mrpippi.github.io/CatBud-Wiki-Website/](https://mrpippi.github.io/CatBud-Wiki-Website/) |
-| **伺服器 IP** | `tcpshield.catbud.net` |
-| **版本** | Java 版 1.21.6 ~ 1.21.11 登入，推薦 1.21.11 |
-| **萌新手冊** | [Google 雲端（BlueRiver1214 製作）](https://drive.google.com/file/d/1fobEcg0DI7lwbmtKBDyWiLmoyVcFZb3s/view) |
-| **Discord** | [discord.gg/catbud](https://discord.gg/catbud) |
+**[https://mrpippi.github.io/CatBud-Wiki-Website/](https://mrpippi.github.io/CatBud-Wiki-Website/)**
 
 ---
 
-## 專案說明
+## 專案介紹
 
-本專案為**靜態網頁版 Wiki**，所有內容已內嵌於 HTML，無需後端或即時讀取 Markdown。在瀏覽器開啟 `index.html` 即可瀏覽；部署至 **GitHub Pages**、**Netlify**、**Vercel** 等靜態託管後即可對外提供服務。
-
-### 主要頁面
-
-- **index.html** — 首頁與分類入口
-- **enchantments.html** — 特殊附魔
-- **commands.html** — 指令
-- **functions.html** — 功能（上架、玩家資料、任務等）
-- **guides.html** — 指南（公共傳點列表等）
-- **items.html** — 物品
-- **modes.html** — 模式（王者戰爭、快樂週年、休閒跑酷等）
-
-### 目錄
-
-完整目錄與條目對照請見 [index.md](index.md)。
+本專案為**貓芽伺服器 Wiki 的網頁版**，由原 Wiki 的 Markdown 內容（fork 來源）轉成靜態網頁。所有條目已內嵌於 HTML，無需後端；內容包含特殊附魔、指令、功能、指南、物品與遊戲模式等分類。
 
 ---
 
