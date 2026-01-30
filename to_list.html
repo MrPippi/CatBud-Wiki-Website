@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="image/Grass_Block.png">
+  <title>公共傳點列表 - 貓芽伺服器 Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="wiki-section.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <style>
+    .to-list-page { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .to-list-page h1 { font-size: 1.75rem; color: var(--accent); margin: 0 0 0.5rem; }
+    .to-list-page .intro { color: var(--text-soft); margin-bottom: 1.5rem; line-height: 1.7; }
+    .to-list-page .meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .to-list-page .category { margin-bottom: 2.5rem; }
+    .to-list-page .category h2 { font-size: 1.2rem; color: var(--accent); margin: 0 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .to-list-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .to-list-table th, .to-list-table td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .to-list-table th { color: var(--text-muted); font-weight: 600; font-size: 0.85rem; }
+    .to-list-table td:first-child { font-family: ui-monospace, monospace; color: var(--text); }
+    .to-list-table .cmd-cell { min-width: 180px; }
+    .to-list-table .copy-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.35rem 0.65rem; font-size: 0.85rem;
+      background: var(--accent-soft); color: var(--accent);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      cursor: pointer; font-family: inherit; transition: background 0.2s, color 0.2s;
+    }
+    .to-list-table .copy-btn:hover { background: var(--accent); color: var(--bg); }
+    .to-list-table .copy-btn i { font-size: 0.9em; }
+    .copy-toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      padding: 0.5rem 1rem; background: var(--accent); color: var(--bg);
+      border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 500;
+      opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
+      z-index: 1000; box-shadow: var(--shadow);
+    }
+    .copy-toast.show { opacity: 1; visibility: visible; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">貓芽伺服器 <span>Wiki</span></a>
+      <div class="header-actions">
+        <a href="to_list.html" class="header-to-list" aria-label="公共傳點列表"><i class="fa-solid fa-map-location-dot"></i> 公共傳點</a>
+        <div class="header-dropdown" id="headerDropdown">
+          <button type="button" class="header-dropdown-trigger" id="headerDropdownTrigger" aria-expanded="false" aria-haspopup="true" aria-controls="headerDropdownMenu">
+            <i class="fa-solid fa-bars"></i> 導航
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="header-dropdown-menu" id="headerDropdownMenu" role="menu">
+            <div class="header-dropdown-menu-group-title">Wiki 分類</div>
+            <a href="index.html" role="menuitem"><i class="fa-solid fa-house"></i> 首頁</a>
+            <a href="enchantments.html" role="menuitem"><i class="fa-solid fa-wand-magic-sparkles"></i> 特殊附魔</a>
+            <a href="commands.html" role="menuitem"><i class="fa-solid fa-terminal"></i> 指令</a>
+            <a href="functions.html" role="menuitem"><i class="fa-solid fa-gear"></i> 功能</a>
+            <a href="items.html" role="menuitem"><i class="fa-solid fa-box"></i> 物品</a>
+            <a href="modes.html" role="menuitem"><i class="fa-solid fa-gamepad"></i> 模式</a>
+            <div class="menu-divider"></div>
+            <div class="header-dropdown-menu-group-title">其他教學連結</div>
+            <a href="https://discord.gg/catbud" target="_blank" rel="noopener" role="menuitem" aria-label="加入 Discord（新分頁開啟）"><i class="fa-brands fa-discord"></i> 加入 Discord</a>
+            <a href="https://drive.google.com/file/d/1fobEcg0DI7lwbmtKBDyWiLmoyVcFZb3s/view" target="_blank" rel="noopener" role="menuitem" aria-label="萌新手冊（新分頁開啟）"><i class="fa-solid fa-book"></i> 萌新手冊</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="to-list-page">
+    <h1><i class="fa-solid fa-map-location-dot"></i> 公共傳點列表</h1>
+    <p class="intro">一個關於貓芽現有公傳點的介紹區，不定時更新。點擊「複製指令」可將傳送指令複製到剪貼簿。</p>
+    <p class="meta">最後更新日期：2026/1/29 · 部分資料來源 @kuroda_yi177 黑田</p>
+
+    <div id="waypointList"></div>
+  </main>
+
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p><span class="brand">貓芽伺服器</span> · 非官方百科 · 伺服器 IP <strong>catbud.net</strong> · Java 版 1.21.6 ~ 1.21.11 登入．推薦 1.21.11</p>
+      <p>本 Wiki 使用圖片均來自<a href="https://discord.gg/catbud" target="_blank" rel="noopener">貓芽伺服器</a>及<a href="https://github.com/CatBudMC" target="_blank" rel="noopener">CatBudMC 的 GitHub</a></p>
+      <p>協助校正請在 Discord 聯繫 @icebearowob · <a href="https://discord.gg/catbud" target="_blank" rel="noopener">discord.gg/catbud</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const WAYPOINT_CATEGORIES = [
+      {
+        title: '公共設施',
+        waypoints: [
+          { command: '/to by NekoFumi_YuYu', description: '公共安德塔' },
+          { command: '/to by Maki_1007', description: 'Pure村民交易所' },
+          { command: '/to by whiteantPi', description: '蠹魚經驗塔' },
+          { command: '/to by daniel1689', description: '公共鐵人塔' },
+          { command: '/to by Ghost_Sister', description: '凋零骷髏塔(已被結構刷新)' },
+          { command: '/to by MinMingOwO', description: '公共鐵人塔' },
+        ]
+      },
+      {
+        title: '地形/結構',
+        waypoints: [
+          { command: '/to by weiwei0829', description: '終界傳送門' },
+          { command: '/to by kiki1225', description: '終界傳送門' },
+          { command: '/to by SYLJ0422', description: '終界本島' },
+        ]
+      },
+      {
+        title: '公共社交活動區域',
+        waypoints: [
+          { command: '/to by Fengwa1007', description: '公共社交中心' },
+          { command: '/to by leoad', description: '萊姆新手村' },
+          { command: '/to by Lishiya_0421', description: '棋牌館' },
+        ]
+      },
+      {
+        title: '交易/抽獎',
+        waypoints: [
+          { command: '/to by Mikki15625', description: '地圖繪兼鑽石抽獎機' },
+          { command: '/to by AXOLOTL_LCY', description: '商場(建設中)' },
+          { command: '/to by TangAir', description: '實體商店街' },
+          { command: '/to by 11cookies22', description: '小型商店街' },
+          { command: '/to by MatchMan_qwq', description: '賭場' },
+        ]
+      },
+      {
+        title: '觀光景點',
+        waypoints: [
+          { command: '/to by YuanHua0707', description: '淵之繪館' },
+          { command: '/to by GuraaaA8787', description: '櫻花樹' },
+          { command: '/to by GiddyStone96043', description: '彩虹烽火台' },
+          { command: '/to by BlueRiver1214', description: '浴衣貓貓/世界重生點' },
+          { command: '/to by XaioWei777', description: '雅利洛VI貝洛柏格' },
+          { command: '/to by 7Meow_Yue', description: '龍龍的結婚禮堂&櫻花庄' },
+          { command: '/to by ComeRed1225', description: '東南山城嶺' },
+          { command: '/to by SangPapillon', description: '法羅小館' },
+          { command: '/to by Luck_Maple', description: '法羅小館' },
+          { command: '/to by SunaChen', description: '燕麥女僕咖啡廳兼藏畫閣' },
+          { command: '/to by jacky00817', description: '雞之繪館' },
+        ]
+      },
+      {
+        title: '其他',
+        waypoints: [
+          { command: '/to by Ochite_Miro', description: '森息家' },
+          { command: '/to by NiceDumpling', description: '奇怪的蜂蜜小屋' },
+          { command: '/to by Big_Gacha', description: '沙漠戰場' },
+          { command: '/to by kenny_wing', description: 'kenny家(小心摔死)' },
+          { command: '/to by shamazai', description: '小溫火藥塔' },
+          { command: '/to by Qing_0525', description: '鐘乳石洞窟' },
+          { command: '/to by Snake960031', description: '史萊姆塔' },
+          { command: '/to by peter19811007', description: '小嘉大教堂' },
+          { command: '/to by WilsonOvO', description: 'Wilson家' },
+          { command: '/to by Wowo_wo', description: '未知建築(但感覺應該是蓋成百貨公司了)' },
+          { command: '/to by Salmon1118', description: '圖場(但公傳點設置在虛空)' },
+        ]
+      },
+      {
+        title: '月卡失效而消失的傳點',
+        waypoints: [
+          { command: '/to by DiuCanTaloupe_', description: '奇幻村' },
+        ]
+      },
+    ];
+
+    function showToast(message) {
+      const toast = document.getElementById('copyToast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      toast.setAttribute('aria-label', message);
+      clearTimeout(toast._hide);
+      toast._hide = setTimeout(() => {
+        toast.classList.remove('show');
+        toast.textContent = '';
+        toast.removeAttribute('aria-label');
+      }, 1800);
+    }
+
+    function renderList() {
+      const container = document.getElementById('waypointList');
+      let html = '';
+      WAYPOINT_CATEGORIES.forEach(cat => {
+        html += `<div class="category"><h2>${cat.title}</h2><table class="to-list-table"><thead><tr><th>傳送指令</th><th>傳點說明</th><th></th></tr></thead><tbody>`;
+        cat.waypoints.forEach(w => {
+          const cmdEsc = w.command.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const descEsc = (w.description || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          html += `<tr><td class="cmd-cell"><code>${cmdEsc}</code></td><td>${descEsc}</td><td><button type="button" class="copy-btn" data-cmd="${cmdEsc}" aria-label="複製指令"><i class="fa-solid fa-copy"></i> 複製指令</button></td></tr>`;
+        });
+        html += '</tbody></table></div>';
+      });
+      container.innerHTML = html;
+
+      container.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cmd = (btn.getAttribute('data-cmd') || '').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+          navigator.clipboard.writeText(cmd).then(() => showToast('已複製到剪貼簿')).catch(() => showToast('複製失敗'));
+        });
+      });
+    }
+
+    (function() {
+      const dropdown = document.getElementById('headerDropdown');
+      const trigger = document.getElementById('headerDropdownTrigger');
+      const menu = document.getElementById('headerDropdownMenu');
+      if (dropdown && trigger && menu) {
+        function close() {
+          dropdown.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+        function toggle() {
+          dropdown.classList.toggle('open');
+          trigger.setAttribute('aria-expanded', dropdown.classList.contains('open') ? 'true' : 'false');
+        }
+        trigger.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+        document.addEventListener('click', close);
+        menu.addEventListener('click', e => e.stopPropagation());
+      }
+    })();
+
+    renderList();
+  </script>
+</body>
+</html>
